@@ -36,162 +36,103 @@ class AnimationDemoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildSection(
-              'Fade In Animation',
-              FadeInAnimation(
-                delay: const Duration(milliseconds: 200),
-                child: _buildCard('I fade in smoothly', Colors.blue),
+            const Text(
+              'Just pick an AnimationType! 🎨',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+
+            // Simple usage - just select animation type!
+            DoAnimateWidget(
+              animationType: AnimationType.fadeIn,
+              child: _buildCard('Fade In', Colors.blue),
+            ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.slideFromLeft,
+              child: _buildCard('Slide From Left', Colors.green),
+            ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.slideFromRight,
+              child: _buildCard('Slide From Right', Colors.orange),
+            ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.scaleIn,
+              config: AnimationConfig.bouncy(),
+              child: _buildCard('Scale In (Bouncy)', Colors.purple),
+            ),
+            const SizedBox(height: 15),
+
+            // With custom configuration
+            DoAnimateWidget(
+              animationType: AnimationType.bounce,
+              config: const AnimationConfig(
+                duration: Duration(seconds: 2),
+                offset: 25.0,
+              ),
+              child: _buildCard('Custom Bounce', Colors.amber),
+            ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.pulse,
+              child: _buildCard('Pulse Animation', Colors.pink),
+            ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.rotate,
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                child: const Icon(Icons.refresh, size: 60, color: Colors.teal),
               ),
             ),
-            _buildSection(
-              'Slide In Animations',
-              Column(
-                children: [
-                  SlideInAnimation.fromLeft(
-                    delay: const Duration(milliseconds: 300),
-                    child: _buildCard('← From Left', Colors.green),
-                  ),
-                  const SizedBox(height: 10),
-                  SlideInAnimation.fromRight(
-                    delay: const Duration(milliseconds: 400),
-                    child: _buildCard('From Right →', Colors.orange),
-                  ),
-                  const SizedBox(height: 10),
-                  SlideInAnimation.fromTop(
-                    delay: const Duration(milliseconds: 500),
-                    child: _buildCard('↑ From Top', Colors.purple),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.wave,
+              child: _buildCard('Wave Effect', Colors.cyan),
             ),
-            _buildSection(
-              'Scale In Animation',
-              ScaleInAnimation(
-                delay: const Duration(milliseconds: 600),
-                beginScale: 0.3,
-                child: _buildCard('I scale in!', Colors.teal),
-              ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.blinking,
+              child: _buildCard('Blinking', Colors.red),
             ),
-            _buildSection(
-              'Continuous Animations',
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  BlinkingAnimation(
-                    duration: const Duration(seconds: 2),
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Text(
-                        'Blinking',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  BounceAnimation(
-                    offset: 15,
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Text('Bouncing'),
-                    ),
-                  ),
-                  RotateAnimation(
-                    duration: const Duration(seconds: 3),
-                    child:
-                        const Icon(Icons.refresh, size: 40, color: Colors.blue),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.shake,
+              child: _buildCard('Shake Animation', Colors.deepOrange),
             ),
-            _buildSection(
-              'Wave Animation',
-              WaveAnimation(
-                amplitude: 10,
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    '🌊 Floating like a wave',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.shimmer,
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.grey[300]!),
                 ),
               ),
             ),
-            _buildSection(
-              'Pulse Animation',
-              PulseAnimation(
-                minScale: 0.95,
-                maxScale: 1.05,
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.pink,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    '💗 Pulsing',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-            _buildSection(
-              'Shimmer Animation (Loading Effect)',
-              ShimmerAnimation(
-                baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ),
-            _buildSection(
-              'Fade + Slide Combo',
-              FadeSlideAnimation(
-                delay: const Duration(milliseconds: 700),
-                begin: const Offset(0, 0.3),
-                child: _buildCard('Fade + Slide Together', Colors.deepPurple),
-              ),
+            const SizedBox(height: 15),
+
+            DoAnimateWidget(
+              animationType: AnimationType.fadeSlide,
+              child: _buildCard('Fade + Slide Combo', Colors.deepPurple),
             ),
             const SizedBox(height: 30),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildSection(String title, Widget child) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 10),
-          child,
-        ],
       ),
     );
   }

@@ -6,12 +6,12 @@ A comprehensive Flutter animation package that provides beautiful, ready-to-use 
 
 ## ✨ Features
 
-- 🎨 **11 Pre-built Animations** - Ready to use out of the box
+- 🎨 **14 Pre-built Animations** - Ready to use out of the box
 - 🚀 **High Performance** - Optimized animations using Flutter's native APIs
-- 🎯 **Easy to Use** - Simple, intuitive API
+- 🎯 **Super Easy to Use** - One widget, just pick an animation type!
 - 🛠️ **Highly Customizable** - Control duration, curves, delays, and more
 - 📱 **Cross-platform** - Works on iOS, Android, Web, and Desktop
-- 🧩 **Composable** - Combine animations for complex effects
+- ⚡ **Single Widget API** - No need to remember different widget names
 
 ## 📦 Installation
 
@@ -28,116 +28,141 @@ Then run:
 flutter pub get
 ```
 
-## 🎬 Available Animations
+## 🎬 All 14 Animations - One Simple Widget!
 
-### 1. **FadeInAnimation** - Fade in effect
+Simply use `DoAnimateWidget` and choose from **14 animation types** using the `AnimationType` enum:
+
+### ✅ All Animations Work Through DoAnimateWidget
+
+Every single animation is accessible through the `DoAnimateWidget` - just change the `animationType`!
+
 ```dart
-FadeInAnimation(
-  duration: Duration(milliseconds: 600),
-  delay: Duration(milliseconds: 200),
+// ANY animation - same simple syntax!
+DoAnimateWidget(
+  animationType: AnimationType.fadeIn,  // Pick any from 14 types!
+  child: Text('Hello World'),
+)
+```
+| # | AnimationType | Description | Type |
+|---|---------------|-------------|------|
+| 1 | `fadeIn` | Fade in effect - gradually appears | One-time |
+| 2 | `slideFromLeft` | Slide in from left side | One-time |
+| 3 | `slideFromRight` | Slide in from right side | One-time |
+| 4 | `slideFromTop` | Slide in from top | One-time |
+| 5 | `slideFromBottom` | Slide in from bottom | One-time |
+| 6 | `scaleIn` | Zoom/scale in effect | One-time |
+| 7 | `blinking` | Continuous blinking/pulsing opacity | Loop |
+| 8 | `bounce` | Continuous bouncing jump effect | Loop |
+| 9 | `rotate` | Continuous rotation | Loop |
+| 10 | `wave` | Wave/floating effect | Loop |
+| 11 | `pulse` | Continuous scale pulsing | Loop |
+| 12 | `shake` | Shake effect (one-time) | One-time |
+| 13 | `shimmer` | Shimmer loading effect | Loop |
+| 14 | `fadeSlide` | Combined fade and slide | One-time |
+| `shake` | Shake effect (one-time) |
+| `shimmer` | Shimmer loading effect |
+| `fadeSlide` | Combined fade and slide |
+
+### 💡 Examples - All Animations Work the Same Way!
+
+```dart
+// 1. Fade In
+DoAnimateWidget(
+  animationType: AnimationType.fadeIn,
   child: Text('Fading in'),
 )
-```
 
-### 2. **SlideInAnimation** - Slide in from any direction
-```dart
-SlideInAnimation.fromLeft(
-  duration: Duration(milliseconds: 800),
-  child: Container(child: Text('Sliding in')),
+// 2. Slide from Left
+DoAnimateWidget(
+  animationType: AnimationType.slideFromLeft,
+  child: Text('Sliding in'),
 )
 
-// Also available: fromRight, fromTop, fromBottom
-```
-
-### 3. **ScaleInAnimation** - Zoom in effect
-```dart
-ScaleInAnimation(
-  duration: Duration(milliseconds: 600),
-  beginScale: 0.5,
+// 3. Scale In
+DoAnimateWidget(
+  animationType: AnimationType.scaleIn,
   child: Icon(Icons.favorite),
 )
-```
 
-### 4. **BlinkingAnimation** - Blinking/pulsing opacity
-```dart
-BlinkingAnimation(
-  duration: Duration(seconds: 2),
-  child: Text('Blinking Text'),
-)
-```
-
-### 5. **BounceAnimation** - Bouncing jump effect
-```dart
-BounceAnimation(
-  duration: Duration(milliseconds: 1000),
-  offset: 20.0,
+// 4. Bounce (continuous)
+DoAnimateWidget(
+  animationType: AnimationType.bounce,
+  config: AnimationConfig(offset: 30.0),
   child: Icon(Icons.star),
 )
-```
 
-### 6. **RotateAnimation** - Continuous rotation
-```dart
-RotateAnimation(
-  duration: Duration(seconds: 3),
-  clockwise: true,
+// 5. Rotate (continuous)
+DoAnimateWidget(
+  animationType: AnimationType.rotate,
   child: Icon(Icons.refresh),
 )
+
+// 6. Shimmer (for loading)
+DoAnimateWidget(
+  animationType: AnimationType.shimmer,
+  child: Container(width: 200, height: 20, color: Colors.white),
+)
+
+// 7. Using Preset Configs
+DoAnimateWidget(
+  animationType: AnimationType.fadeIn,
+  config: AnimationConfig.fast(),  // or .slow(), .bouncy()
+  child: Text('Fast animation!'),
+)
 ```
 
-### 7. **ShimmerAnimation** - Shimmer loading effect
+## 🚀 Quick Start - Easy API
+
+The easiest way to use DoAnimate is with `DoAnimateWidget` - just pick an animation type!
+
 ```dart
-ShimmerAnimation(
-  duration: Duration(milliseconds: 1500),
-  baseColor: Colors.grey[300]!,
-  highlightColor: Colors.grey[100]!,
-  child: Container(
-    width: 200,
-    height: 20,
-    color: Colors.white,
+import 'package:flutter/material.dart';
+import 'package:do_animate/do_animate.dart';
+
+// Simple - just choose an AnimationType!
+DoAnimateWidget(
+  animationType: AnimationType.fadeIn,
+  child: Text('Hello World'),
+)
+
+// With custom duration
+DoAnimateWidget(
+  animationType: AnimationType.bounce,
+  config: AnimationConfig(
+    duration: Duration(seconds: 2),
+    offset: 30.0,
   ),
+  child: Icon(Icons.star),
+)
+
+// Use predefined configs
+DoAnimateWidget(
+  animationType: AnimationType.scaleIn,
+  config: AnimationConfig.fast(), // or .slow(), .bouncy()
+  child: Container(...),
 )
 ```
 
-### 8. **WaveAnimation** - Wave/floating effect
+### Available Animation Types
+
 ```dart
-WaveAnimation(
-  duration: Duration(seconds: 2),
-  amplitude: 10.0,
-  child: Icon(Icons.water_drop),
-)
+AnimationType.fadeIn
+AnimationType.slideFromLeft
+AnimationType.slideFromRight
+AnimationType.slideFromTop
+AnimationType.slideFromBottom
+AnimationType.scaleIn
+AnimationType.blinking
+AnimationType.bounce
+AnimationType.rotate
+AnimationType.wave
+AnimationType.pulse
+AnimationType.shake
+AnimationType.shimmer
+AnimationType.fadeSlide
 ```
 
-### 9. **PulseAnimation** - Pulsing scale effect
-```dart
-PulseAnimation(
-  duration: Duration(milliseconds: 1000),
-  minScale: 0.95,
-  maxScale: 1.05,
-  child: Icon(Icons.notifications),
-)
-```
-
-### 10. **ShakeAnimation** - Shake effect for errors
-```dart
-ShakeAnimation(
-  duration: Duration(milliseconds: 500),
-  offset: 10.0,
-  shakes: 3,
-  child: TextField(),
-)
-```
-
-### 11. **FadeSlideAnimation** - Combined fade and slide
-```dart
-FadeSlideAnimation(
-  duration: Duration(milliseconds: 800),
-  begin: Offset(0, 0.5),
-  delay: Duration(milliseconds: 100),
-  child: Card(child: Text('Animated Card')),
-)
-```
-
-## 🎯 Usage Example
+## 🎯 Complete Example
 
 Here's a complete example showing multiple animations:
 
@@ -157,74 +182,100 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FadeInAnimation(
-                delay: Duration(milliseconds: 200),
+              // Easy API - Just choose animation type!
+              DoAnimateWidget(
+                animationType: AnimationType.fadeIn,
                 child: Text('Fading In', style: TextStyle(fontSize: 24)),
               ),
               SizedBox(height: 20),
-              SlideInAnimation.fromLeft(
-                delay: Duration(milliseconds: 400),
+              DoAnimateWidget(
+                animationType: AnimationType.slideFromLeft,
                 child: Text('Sliding From Left', style: TextStyle(fontSize: 24)),
               ),
               SizedBox(height: 20),
-              ScaleInAnimation(
-                delay: Duration(milliseconds: 600),
+              DoAnimateWidget(
+                animationType: AnimationType.scaleIn,
+                config: AnimationConfig.bouncy(),
                 child: Text('Scaling In', style: TextStyle(fontSize: 24)),
               ),
               SizedBox(height: 40),
-              RotateAnimation(
+              DoAnimateWidget(
+                animationType: AnimationType.rotate,
                 child: Icon(Icons.refresh, size: 48),
               ),
-              SizedBox(height: 20),
-              BounceAnimation(
-                child: Icon(Icons.star, size: 48, color: Colors.amber),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-```
+## 🎨 Full Customization Options
 
-## 🎨 Customization
-
-All animations support customization through parameters:
-
-- **duration**: Control animation speed
-- **curve**: Choose from Flutter's animation curves (Curves.easeIn, Curves.bounceOut, etc.)
-- **delay**: Add delays before animation starts
-- **Custom properties**: Each animation has specific properties (offset, scale, rotation, etc.)
-
-Example with custom curve:
+All 14 animations support the same `AnimationConfig` customization:
 
 ```dart
-FadeInAnimation(
-  duration: Duration(seconds: 1),
-  curve: Curves.elasticOut,
+DoAnimateWidget(
+  animationType: AnimationType.fadeIn, // Works with ANY animation type!
+  config: AnimationConfig(
+    duration: Duration(seconds: 1),
+    curve: Curves.elasticOut,
+    delay: Duration(milliseconds: 200),
+  ),
   child: YourWidget(),
 )
+```
+
+### 📝 AnimationConfig Properties:
+Use `AnimationConfig` to customize any animation:
+| Property | Used For | Description |
+|----------|----------|-------------|
+| `duration` | All animations | Control animation speed |
+| `curve` | All animations | Animation curve (Curves.easeIn, etc.) |
+| `delay` | One-time animations | Delay before starting |
+| `offset` | bounce, shake | Jump/shake distance |
+| `minScale/maxScale` | pulse | Scale range |
+| `beginScale` | scaleIn | Starting scale value |
+| `amplitude` | wave | Wave height |
+| `clockwise` | rotate | Rotation direction |
+| `baseColor/highlightColor` | shimmer | Shimmer colors |
+| `slideBegin` | fadeSlide | Custom slide offset |
+| `shakes` | shake | Number of shakes |
+
+### ⚡ Quick Preset Configs:
+
+```dart
+AnimationConfig.fast()    // 300ms, easeOut - snappy animations
+AnimationConfig.slow()    // 1200ms, easeInOut - smooth, gentle
+AnimationConfig.bouncy()  // 800ms, elasticOut - fun, playful
+```*delay**: Delay before animation starts
+- **offset**: For bounce/shake animations
+- **minScale/maxScale**: For pulse animations
+- **beginScale**: For scale animations
+- **amplitude**: For wave animations
+- **clockwise**: For rotate animations
+- **baseColor/highlightColor**: For shimmer animations
+- **slideBegin**: For slide animations
+
+### Preset Configs:
+
+```dart
+AnimationConfig.fast()    // 300ms, easeOut
+AnimationConfig.slow()    // 1200ms, easeInOut
+AnimationConfig.bouncy()  // 800ms, elasticOut
 ```
 
 ## 🔄 Animation Types
 
 ### One-time Animations
-These animations play once when the widget is built:
-- FadeInAnimation
-- SlideInAnimation
-- ScaleInAnimation
-- FadeSlideAnimation
-- ShakeAnimation (plays once on build)
+Play once when the widget is built:
+- `AnimationType.fadeIn`
+- `AnimationType.slideFromLeft/Right/Top/Bottom`
+- `AnimationType.scaleIn`
+- `AnimationType.fadeSlide`
+- `AnimationType.shake`
 
 ### Continuous Animations
-These animations loop indefinitely:
-- BlinkingAnimation
-- BounceAnimation
-- RotateAnimation
-- WaveAnimation
-- PulseAnimation
-- ShimmerAnimation
+Loop indefinitely:
+- `AnimationType.blinking`
+- `AnimationType.bounce`
+- `AnimationType.rotate`
+- `AnimationType.wave`
+- `AnimationType.pulse`
+- `AnimationType.shimmer`
 
 ## 🌟 Best Practices
 
@@ -232,28 +283,39 @@ These animations loop indefinitely:
 ```dart
 Column(
   children: [
-    FadeInAnimation(delay: Duration(milliseconds: 0), child: Widget1()),
-    FadeInAnimation(delay: Duration(milliseconds: 200), child: Widget2()),
-    FadeInAnimation(delay: Duration(milliseconds: 400), child: Widget3()),
+    DoAnimateWidget(
+      animationType: AnimationType.fadeIn,
+      child: Widget1(),
+    ),
+    DoAnimateWidget(
+      animationType: AnimationType.fadeIn,
+      config: AnimationConfig(delay: Duration(milliseconds: 200)),
+      child: Widget2(),
+    ),
+    DoAnimateWidget(
+      animationType: AnimationType.fadeIn,
+      config: AnimationConfig(delay: Duration(milliseconds: 400)),
+      child: Widget3(),
+    ),
   ],
 )
 ```
 
-2. **Combine animations for complex effects**:
-```dart
-FadeInAnimation(
-  child: ScaleInAnimation(
-    child: YourWidget(),
-  ),
-)
-```
-
-3. **Use ShimmerAnimation for loading states**:
+2. **Use shimmer for loading states**:
 ```dart
 isLoading
-  ? ShimmerAnimation(child: PlaceholderWidget())
+  ? DoAnimateWidget(
+      animationType: AnimationType.shimmer,
+      child: PlaceholderWidget(),
+    )
   : ActualContent()
 ```
+
+3. **Choose the right animation type for your use case**:
+- Use `fadeIn` for subtle entrances
+- Use `slideFromLeft/Right` for navigation transitions
+- Use `bounce` or `pulse` for attention-grabbing elements
+- Use `shimmer` for skeleton loading screens
 
 ## 📖 Documentation
 

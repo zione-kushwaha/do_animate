@@ -8,22 +8,13 @@
 /// ```dart
 /// import 'package:do_animate/do_animate.dart';
 ///
-/// FadeInAnimation(
-///   duration: Duration(milliseconds: 600),
+/// DoAnimateWidget(
+///   animationType: AnimationType.fadeIn,
 ///   child: Text('Hello World'),
 /// )
 /// ```
 library;
 
-// Export all animation widgets
-export 'src/blinking_animation.dart';
-export 'src/bounce_animation.dart';
-export 'src/fade_in_animation.dart';
-export 'src/fade_slide_animation.dart';
-export 'src/pulse_animation.dart';
-export 'src/rotate_animation.dart';
-export 'src/scale_in_animation.dart';
-export 'src/shake_animation.dart';
-export 'src/shimmer_animation.dart';
-export 'src/slide_in_animation.dart';
-export 'src/wave_animation.dart';
+// Export the main widget and animation types
+export 'src/do_animate_widget.dart';
+export 'src/animation_type.dart';
